@@ -1,12 +1,12 @@
 package org.geeksforgeeks.binarytree;
 
 /**
- * Finds size of a binary tree
+ * 
  * @author Shiva
  *
  * @param <Item>
  */
-public class BinaryTreeSize<Item extends Comparable<Item>> {
+public class BinaryTreeTemplate<Item extends Comparable<Item>> {
 	
 	private Node root;
 	
@@ -25,7 +25,7 @@ public class BinaryTreeSize<Item extends Comparable<Item>> {
 		root = insert(root, key);
 	}
 
-	private BinaryTreeSize<Item>.Node insert(BinaryTreeSize<Item>.Node root2,
+	private BinaryTreeTemplate<Item>.Node insert(BinaryTreeTemplate<Item>.Node root2,
 			Item key) {
 		if (root2 == null)
 			return new Node(key);
@@ -36,19 +36,9 @@ public class BinaryTreeSize<Item extends Comparable<Item>> {
 			root2.right = insert(root2.right, key);
 		return root2;
 	}
-	
-	public int size() {
-		return size(root);
-	}
-
-	private int size(BinaryTreeSize<Item>.Node root2) {
-		if (root2 == null)
-			return 0;
-		return size(root2.left) + 1 + size(root2.right);
-	}
 
 	public static void main(String[] args) {
-		BinaryTreeSize<Integer> bt = new BinaryTreeSize<Integer>();
+		BinaryTreeTemplate<Integer> bt = new BinaryTreeTemplate<Integer>();
 		bt.insert(5);
 		bt.insert(3);
 		bt.insert(8);
@@ -56,9 +46,6 @@ public class BinaryTreeSize<Item extends Comparable<Item>> {
 		bt.insert(4);
 		bt.insert(6);
 		bt.insert(10);
-		
-		System.out.println("size: " + bt.size());
-
 	}
 
 }
