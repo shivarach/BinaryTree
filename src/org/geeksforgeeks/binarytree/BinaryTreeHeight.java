@@ -1,12 +1,14 @@
 package org.geeksforgeeks.binarytree;
 
+import com.sun.org.apache.bcel.internal.generic.RETURN;
+
 /**
  * 
  * @author Shiva
  *
  * @param <Item>
  */
-public class BinaryTreeTemplate<Item extends Comparable<Item>> {
+public class BinaryTreeHeight<Item extends Comparable<Item>> {
 	
 	private Node root;
 	
@@ -25,7 +27,7 @@ public class BinaryTreeTemplate<Item extends Comparable<Item>> {
 		root = insert(root, key);
 	}
 
-	private BinaryTreeTemplate<Item>.Node insert(BinaryTreeTemplate<Item>.Node root2,
+	private BinaryTreeHeight<Item>.Node insert(BinaryTreeHeight<Item>.Node root2,
 			Item key) {
 		if (root2 == null)
 			return new Node(key);
@@ -37,19 +39,23 @@ public class BinaryTreeTemplate<Item extends Comparable<Item>> {
 		return root2;
 	}
 	
-	public void inOrderTraversal() {
-		inOrderTraversal(root);
+	public int height() {
+		return height(root);
 	}
 
-	private void inOrderTraversal(BinaryTreeTemplate<Item>.Node root) {
-		if (root == null) return;
-		inOrderTraversal(root.left);
-		System.out.print(root.key + " ");
-		inOrderTraversal(root.right);
+	private int height(BinaryTreeHeight<Item>.Node root2) {
+		if(root2 == null)
+			return -1;
+		return 1 + max( height(root2.left), height( root2.right ));
+	}
+	
+	private int max(int a, int b) {
+		int result = a > b ?  a :  b;
+		return result;
 	}
 
 	public static void main(String[] args) {
-		BinaryTreeTemplate<Integer> bt = new BinaryTreeTemplate<Integer>();
+		BinaryTreeHeight<Integer> bt = new BinaryTreeHeight<Integer>();
 		bt.insert(5);
 		bt.insert(3);
 		bt.insert(8);
@@ -58,7 +64,7 @@ public class BinaryTreeTemplate<Item extends Comparable<Item>> {
 		bt.insert(6);
 		bt.insert(10);
 		
-		bt.inOrderTraversal();
+		System.out.println(bt.height());
 	}
 
 }
