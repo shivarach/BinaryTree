@@ -5,7 +5,8 @@ import java.util.Queue;
 
 
 /**
- * 
+ * Hight of a binary tree in iterative way
+ * T:O(n)
  * @author Shiva
  *
  * @param <Item>
