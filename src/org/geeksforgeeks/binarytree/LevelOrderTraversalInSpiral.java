@@ -1,94 +1,105 @@
 package org.geeksforgeeks.binarytree;
 
+import java.util.Stack;
+
 /**
- * Write a function to print spiral order traversal of a tree.
- * T:O(n^2) where n is no. of nodes
+ * Write a function to print spiral order traversal of a tree. T:O(n) where n is
+ * no. of nodes S:O(n)
+ * 
  * @author Shiva
  *
  * @param <Item>
  */
 public class LevelOrderTraversalInSpiral<Item extends Comparable<Item>> {
-	
+
 	private Node root;
-	
+
 	class Node {
 		private Item key;
 		private Node left, right;
-		
+
 		public Node(Item key) {
 			this.key = key;
 		}
 	}
-	
+
 	public void insert(Item key) {
-		if(key == null)
+		if (key == null)
 			return;
 		root = insert(root, key);
 	}
 
-	private LevelOrderTraversalInSpiral<Item>.Node insert(LevelOrderTraversalInSpiral<Item>.Node root2,
-			Item key) {
+	private LevelOrderTraversalInSpiral<Item>.Node insert(
+			LevelOrderTraversalInSpiral<Item>.Node root2, Item key) {
 		if (root2 == null)
 			return new Node(key);
 		int cmp = key.compareTo(root2.key);
-		if(cmp <= 0)
+		if (cmp <= 0)
 			root2.left = insert(root2.left, key);
 		else
 			root2.right = insert(root2.right, key);
 		return root2;
 	}
-	
+
 	public void inOrderTraversal() {
 		inOrderTraversal(root);
 	}
 
 	private void inOrderTraversal(LevelOrderTraversalInSpiral<Item>.Node root) {
-		if (root == null) return;
+		if (root == null)
+			return;
 		inOrderTraversal(root.left);
 		System.out.print(root.key + " ");
 		inOrderTraversal(root.right);
 	}
-	
+
 	public void levelOrderTraversalInSpiral() {
-		int h = findHeight(root);
-		for (int i = 0 ; i <= h; i++) {
-			// even level traversed from right to left and vice versa
-			printGivenLevel(root, i, (i % 2 == 0));
-			System.out.println();
-		}
-			
+		levelOrderTraversalInSpiral(root);
 	}
 
-	private void printGivenLevel(LevelOrderTraversalInSpiral<Item>.Node x,
-			int level, boolean isRightToLeft) {
+	/**
+	 * The idea is to use two stacks. We can use one stack for printing from
+	 * left to right and other stack for printing from right to left. In every
+	 * iteration, we have nodes of one level in one of the stacks. We print the
+	 * nodes, and push nodes of next level in other stack.
+	 * 
+	 * @param x
+	 */
+	private void levelOrderTraversalInSpiral(Node x) {
 		if (x == null)
 			return;
-		if(level == 0) {
-			System.out.print(x.key + " ");
-			return;
-		}
-		else {
-			if(isRightToLeft) {// even level traversed from right to left
-				printGivenLevel(x.right, level - 1, isRightToLeft);
-				printGivenLevel(x.left, level - 1, isRightToLeft);
-			}
-			else {// odd level traversed from left to right
-				printGivenLevel(x.left, level - 1, isRightToLeft);
-				printGivenLevel(x.right, level - 1, isRightToLeft);
-			}
-		}
-		
-	}
+		Stack<Node> leftToRightStack = new Stack<Node>();
+		Stack<Node> rightToLeftStack = new Stack<Node>();
+		rightToLeftStack.push(x);
 
-	private int findHeight(LevelOrderTraversalInSpiral<Item>.Node x) {
-		if(x == null)
-			return -1;
-		return 1 + max(findHeight(x.left), findHeight(x.right));
-	}
+		while (!leftToRightStack.empty() || !rightToLeftStack.empty()) {
 
-	private int max(int a, int b) {
-		int result = a > b ? a : b;
-		return result;
+			while (!rightToLeftStack.empty()) {
+				Node tmp = rightToLeftStack.pop();
+				System.out.print(tmp.key + " ");
+				// first right node should be passed to get left Node in next
+				// iteration
+				if (tmp.right != null)
+					leftToRightStack.push(tmp.right);
+				if (tmp.left != null)
+					leftToRightStack.push(tmp.left);
+			}
+
+			System.out.println();
+
+			while (!leftToRightStack.empty()) {
+				Node tmp = leftToRightStack.pop();
+				System.out.print(tmp.key + " ");
+				// first right node should be passed to get left Node in next
+				// iteration
+				if (tmp.left != null)
+					rightToLeftStack.push(tmp.left);
+				if (tmp.right != null)
+					rightToLeftStack.push(tmp.right);
+			}
+			System.out.println();
+		}
+
 	}
 
 	public static void main(String[] args) {
@@ -100,7 +111,7 @@ public class LevelOrderTraversalInSpiral<Item extends Comparable<Item>> {
 		bt.insert(4);
 		bt.insert(6);
 		bt.insert(10);
-		
+
 		bt.inOrderTraversal();
 		System.out.println("\nLevel order traversal in spiral way: ");
 		bt.levelOrderTraversalInSpiral();
