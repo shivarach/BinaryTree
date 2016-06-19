@@ -20,7 +20,7 @@ DFS: Worst case occurs when tree is a skew tree(like linked list)
  *
  * @param <Item>
  */
-public class BinaryTreeTraversal_1<Item extends Comparable<Item>> {
+public class BinaryTreeTraversal<Item extends Comparable<Item>> {
 	private Node root = null;
 
 	class Node {
@@ -36,7 +36,7 @@ public class BinaryTreeTraversal_1<Item extends Comparable<Item>> {
 		root = insert(root, data);
 	}
 
-	private Node insert(BinaryTreeTraversal_1<Item>.Node root, Item data) {
+	private Node insert(BinaryTreeTraversal<Item>.Node root, Item data) {
 		if (root == null)
 			return new Node(data);
 		int cmp = data.compareTo(root.data);
@@ -51,7 +51,7 @@ public class BinaryTreeTraversal_1<Item extends Comparable<Item>> {
 		inOrderTraversal(root);
 	}
 
-	private void inOrderTraversal(BinaryTreeTraversal_1<Item>.Node root) {
+	private void inOrderTraversal(BinaryTreeTraversal<Item>.Node root) {
 		if (root == null) return;
 		inOrderTraversal(root.left);
 		System.out.print(root.data + " ");
@@ -62,7 +62,7 @@ public class BinaryTreeTraversal_1<Item extends Comparable<Item>> {
 		preOrderTraversal(root);
 	}
 
-	private void preOrderTraversal(BinaryTreeTraversal_1<Item>.Node root) {
+	private void preOrderTraversal(BinaryTreeTraversal<Item>.Node root) {
 		if (root == null) return;
 		System.out.print(root.data + " ");
 		preOrderTraversal(root.left);
@@ -73,7 +73,7 @@ public class BinaryTreeTraversal_1<Item extends Comparable<Item>> {
 		postOrderTraversal(root);
 	}
 
-	private void postOrderTraversal(BinaryTreeTraversal_1<Item>.Node root) {
+	private void postOrderTraversal(BinaryTreeTraversal<Item>.Node root) {
 		if (root == null) return;
 		postOrderTraversal(root.left);
 		postOrderTraversal(root.right);
@@ -81,7 +81,7 @@ public class BinaryTreeTraversal_1<Item extends Comparable<Item>> {
 	}
 	
 	public void levelOrderTraversal() {
-		Queue<Node> queue = new LinkedList<BinaryTreeTraversal_1<Item>.Node>();
+		Queue<Node> queue = new LinkedList<BinaryTreeTraversal<Item>.Node>();
 		queue.add(root);
 		while(!queue.isEmpty()) {
 			Node tmp = queue.poll();
@@ -94,7 +94,7 @@ public class BinaryTreeTraversal_1<Item extends Comparable<Item>> {
 	}
 
 	public static void main(String[] args) {
-		BinaryTreeTraversal_1<Integer> bt = new BinaryTreeTraversal_1<Integer>();
+		BinaryTreeTraversal<Integer> bt = new BinaryTreeTraversal<Integer>();
 		bt.insert(5);
 		bt.insert(3);
 		bt.insert(8);
