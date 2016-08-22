@@ -44,6 +44,18 @@ public class CompletBTCreation<Item extends Comparable<Item>> {
 			q.poll();
 		}
 	}
+
+	private CompletBTCreation<Item>.Node insert(CompletBTCreation<Item>.Node root2,
+			Item key) {
+		if (root2 == null)
+			return new Node(key);
+		int cmp = key.compareTo(root2.key);
+		if(cmp <= 0)
+			root2.left = insert(root2.left, key);
+		else
+			root2.right = insert(root2.right, key);
+		return root2;
+	}
 	
 	public void inOrderTraversal() {
 		inOrderTraversal(root);
@@ -101,9 +113,6 @@ public class CompletBTCreation<Item extends Comparable<Item>> {
 		bt.insert(3);
 		bt.insert(8);
 		bt.insert(1);
-		bt.insert(4);
-		bt.insert(6);
-		bt.insert(10);
 		bt.insert(4);
 		bt.insert(6);
 		bt.insert(10);
