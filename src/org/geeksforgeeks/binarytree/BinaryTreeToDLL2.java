@@ -1,14 +1,18 @@
 package org.geeksforgeeks.binarytree;
 
 /**
- * BinaryTreeToDLL2 is easy
+ * 
  * @author Shiva
  *
  * @param <Item>
  */
-public class BinaryTreeToDLL<Item extends Comparable<Item>> {
+public class BinaryTreeToDLL2<Item extends Comparable<Item>> {
 	
 	private Node root;
+	
+	private Node head;
+	
+	private Node prev;
 	
 	class Node {
 		private Item key;
@@ -25,7 +29,7 @@ public class BinaryTreeToDLL<Item extends Comparable<Item>> {
 		root = insert(root, key);
 	}
 
-	private BinaryTreeToDLL<Item>.Node insert(BinaryTreeToDLL<Item>.Node root2,
+	private BinaryTreeToDLL2<Item>.Node insert(BinaryTreeToDLL2<Item>.Node root2,
 			Item key) {
 		if (root2 == null)
 			return new Node(key);
@@ -37,42 +41,25 @@ public class BinaryTreeToDLL<Item extends Comparable<Item>> {
 		return root2;
 	}
 
-	public Node convertBinaryTreeToDLL(Node root) {
-		Node tmp = binaryToDLL(root);
-		if (tmp == null)
-			return tmp;
-		while (tmp.left != null)
-			tmp = tmp.left;
-		return tmp;//head
-	}
-	
-	private Node binaryToDLL(Node x) {
+	public void binaryToDLL(Node x) {
 		if (x == null)
-			return x;
-		Node a = binaryToDLL(x.left);
-		if (a != null) {
-			// move a towards right most
-			while (a.right != null)
-				a = a.right;
-			a.right = x;
-			x.left = a;
+			return;
+		binaryToDLL(x.left);
+		if (prev == null)
+			head = x;
+		else {
+			prev.right = x;
+			x.left = prev;
 		}
-		Node b = binaryToDLL(x.right);
-		if (b != null) {
-			// move a towards right most
-			while (b.left != null)
-				b = b.left;
-			x.right = b;
-			b.left = x;
-		}
-		return x;
+		prev = x;
+		binaryToDLL(x.right);
 	}
 	
 	public void inOrderTraversal() {
 		inOrderTraversal(root);
 	}
 
-	private void inOrderTraversal(BinaryTreeToDLL<Item>.Node root) {
+	private void inOrderTraversal(BinaryTreeToDLL2<Item>.Node root) {
 		if (root == null) return;
 		inOrderTraversal(root.left);
 		System.out.print(root.key + " ");
@@ -80,7 +67,7 @@ public class BinaryTreeToDLL<Item extends Comparable<Item>> {
 	}
 
 	public static void main(String[] args) {
-		BinaryTreeToDLL<Integer> bt = new BinaryTreeToDLL<Integer>();
+		BinaryTreeToDLL2<Integer> bt = new BinaryTreeToDLL2<Integer>();
 		bt.insert(5);
 		bt.insert(3);
 		bt.insert(8);
@@ -92,11 +79,12 @@ public class BinaryTreeToDLL<Item extends Comparable<Item>> {
 		System.out.print("Binary Tree : ");
 		bt.inOrderTraversal();
 		
-		BinaryTreeToDLL<Integer>.Node head = bt.convertBinaryTreeToDLL(bt.root);
+		bt.binaryToDLL(bt.root);
 		System.out.print("\nDouble linked list : ");
-		while(head != null) {
-			System.out.print(head.key + " ");
-			head = head.right;
+		BinaryTreeToDLL2<Integer>.Node tmp = bt.head;
+		while(tmp != null) {
+			System.out.print(tmp.key + " ");
+			tmp = tmp.right;
 		}
 	}
 
