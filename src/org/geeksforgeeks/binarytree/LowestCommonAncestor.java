@@ -73,9 +73,9 @@ public class LowestCommonAncestor<Item extends Comparable<Item>> {
 		Node lcaRight = findLCAUtil(x.right, a, b);
 		
 		if ((lcaLeft != null && lcaRight != null) || lca != null)
-			lca = x;
-		else lca = lcaLeft != null ? lcaLeft : lcaRight;
-		return lca;
+			return x;
+		else 
+			return lcaLeft != null ? lcaLeft : lcaRight;
 	}
 
 	public static void main(String[] args) {
