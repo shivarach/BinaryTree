@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
+ * Check recursive solution which is also easy http://www.geeksforgeeks.org/check-whether-binary-tree-complete-not-set-2-recursive-solution/
  * Given a Binary Tree, write a function to check whether the given Binary Tree
  * is Complete Binary Tree or not.
  * 
