@@ -96,8 +96,8 @@ public class DistanceBetweenTwoKeys<Item extends Comparable<Item>> {
 		bt.insert(10);
 		
 		bt.inOrderTraversal();
-		int a = 3;
-		int b = 10;
+		int a = 4;
+		int b = 6;
 		System.out.println("\ndistance between " + a + " and " + b + " is : ");
 		System.out.println(bt.distanceBetweenAandB(bt.root, a, b));
 	}
