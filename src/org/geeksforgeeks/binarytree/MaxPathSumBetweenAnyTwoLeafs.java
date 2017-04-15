@@ -62,21 +62,17 @@ public class MaxPathSumBetweenAnyTwoLeafs {
 	private int maxPath(MaxPathSumBetweenAnyTwoLeafs.Node x, Result res) {
 		if (x == null)
 			return 0;
-		if(x.left == null && x.right == null)
+		if (x.left == null && x.right == null)
 			return x.key;
 		int ls = maxPath(x.left, res);
 		int rs = maxPath(x.right, res);
-		
-		if(x.left != null && x.right != null) {
-			// update sum
-			int currentSum = ls + rs + x.key;
-			if (res.maxSum < currentSum)
-				res.maxSum = currentSum;
-			return ls > rs ? (ls + x.key) : (rs + x.key);
-		}
-		//when there is only on child
-		return x.left != null ? ls + x.key : rs + x.key;
-		
+
+		// update sum
+		int currentSum = ls + rs + x.key;
+		if (res.maxSum < currentSum)
+			res.maxSum = currentSum;
+		return ls > rs ? (ls + x.key) : (rs + x.key);
+
 	}
 
 	public static void main(String[] args) {
