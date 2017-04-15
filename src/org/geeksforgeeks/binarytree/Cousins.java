@@ -47,6 +47,7 @@ public class Cousins<Item extends Comparable<Item>> {
 		inOrderTraversal(root.left);
 		System.out.print(root.key + " ");
 		inOrderTraversal(root.right);
+		
 	}
 	
 	public boolean areCousins(Node x, Item a, Item b) {
@@ -93,10 +94,8 @@ public class Cousins<Item extends Comparable<Item>> {
 			}
 			else level = currentLev;
 		}
-		boolean left = areCousins(x.left, a, b, currentLev + 1);
-		if (!left)
-			return areCousins(x.right, a, b, currentLev + 1);
-		return left;
+		return areCousins(x.left, a, b, currentLev + 1) ||
+				areCousins(x.right, a, b, currentLev + 1);
 	}
 	
 /*	private int checkLevels(int level, int currentLevel) {
