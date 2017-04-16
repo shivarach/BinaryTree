@@ -11,7 +11,7 @@ import java.util.Queue;
  * A complete binary tree is a binary tree in which every level, except possibly
  * the last, is completely filled, and all nodes are as far left as possible.
  * T: O(n)
- * S: O(1)
+ * S: O(n)
  * @author Shiva
  *
  * @param <Item>
