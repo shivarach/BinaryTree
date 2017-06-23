@@ -50,7 +50,7 @@ public class CloneBinaryTreeWithRandomPointers<Item extends Comparable<Item>> {
 		inOrderTraversal(root.left);
 		//print key of current node and random
 		Item randomKey = root.random == null ? null : root.random.key;
-		System.out.print("[" + root.key + ", " + randomKey + "]");
+		System.out.print("[" + root.key + ", " + randomKey +"]");
 		inOrderTraversal(root.right);
 	}
 	
@@ -63,7 +63,7 @@ public class CloneBinaryTreeWithRandomPointers<Item extends Comparable<Item>> {
 
 	private void setRandomPointers(Node x, Node clonedRoot, Map<Node, Node> mapOfActualAndClone) {
 		for (Node actualNode : mapOfActualAndClone.keySet()) {
-			mapOfActualAndClone.get(actualNode).random = actualNode.random;
+			mapOfActualAndClone.get(actualNode).random = mapOfActualAndClone.get(actualNode.random);
 		}
 	}
 
