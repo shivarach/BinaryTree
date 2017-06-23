@@ -41,10 +41,10 @@ public class BinaryTreeHeight<Item extends Comparable<Item>> {
 	public int height() {
 		return height(root);
 	}
-
+	//no. of edges of from root to farthest leaf
 	private int height(BinaryTreeHeight<Item>.Node root2) {
 		if(root2 == null)
-			return -1;
+			return -1;//use '0' if height is considered no. of nodes from root to farther leaf
 		return 1 + max( height(root2.left), height( root2.right ));
 	}
 	
