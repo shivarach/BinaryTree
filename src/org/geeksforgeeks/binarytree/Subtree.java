@@ -63,7 +63,7 @@ public class Subtree<Item extends Comparable<Item>> {
 		if(x.key.equals(rootS.key))
 			return x;
 		Node left = findSubTreeRootNodeInTree(x.left, rootS);
-		if(left != null)
+		if(left == null)
 			findSubTreeRootNodeInTree(x.right, rootS);
 		return left;
 	}
