@@ -1,7 +1,7 @@
 package org.geeksforgeeks.binarytree;
 
 /**
- * 
+ * Find easily understandable one at http://www.geeksforgeeks.org/check-two-nodes-cousins-binary-tree/ 
  * @author Shiva
  * T: O(n)
  * @param <Item>
