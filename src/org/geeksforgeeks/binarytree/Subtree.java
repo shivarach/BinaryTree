@@ -1,9 +1,9 @@
 package org.geeksforgeeks.binarytree;
 
 /**
- * 
+ * See this for O(n) solution http://www.geeksforgeeks.org/check-binary-tree-subtree-another-binary-tree-set-2/
  * @author Shiva
- *
+ *This problem assumes that no duplicates are in the tree
  * @param <Item>
  */
 public class Subtree<Item extends Comparable<Item>> {
