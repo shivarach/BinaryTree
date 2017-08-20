@@ -3,7 +3,7 @@ package org.geeksforgeeks.binarytree;
 /**
  * 
  * @author Shiva
- *
+ * Print all the paths in a binary tree
  * @param <Item>
  */
 public class PathOfBinaryTree<Item extends Comparable<Item>> {
