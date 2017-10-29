@@ -1,7 +1,7 @@
 package org.geeksforgeeks.binarytree;
 
 /**
- * 
+ * Print all the paths of binary tree
  * @author Shiva
  * Print all the paths in a binary tree
  * @param <Item>
